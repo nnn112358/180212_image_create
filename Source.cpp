@@ -38,8 +38,8 @@ double gaussian_random(double mean, double std);
 
 int main(int argc, char* argv[]){
 
-	double img_width_mm = 32.0;
-	double img_height_mm = 130;
+	double img_width_mm = 10;
+	double img_height_mm = 420;
 
 	double gray_white = 20;			//White
 	double gray_black_ave = 228;	//Black
@@ -75,11 +75,19 @@ int main(int argc, char* argv[]){
 	double screen_grid_um= 25.4  * 1000.0 * 16.0 / 2400.0;
 	cout << "screen_grid_num" << endl;
 
+	cout <<" img_width / screen_grid_um"<< img_width / screen_grid_um << endl;
+	cout << " img_height / screen_grid_um" << img_height / screen_grid_um << endl;
+	cout << " img_width" << img_width << endl;
+	cout << " img_height" << img_height << endl;
+	cout << " screen_grid_um" << screen_grid_um << endl;
+	cout << " um2dot" << um2dot << endl;
 
-	for (long i = 0; i < img_width / 16; i++) {
-		for (long j = 0; j < img_height/16; j++) {
+	for (long i = 0; i < img_width / screen_grid_um/ um2dot; i++) {
+		for (long j = 0; j < img_height/ screen_grid_um/ um2dot; j++) {
 			double xx = screen_grid_um*i;
 			double yy = screen_grid_um*j;
+
+
 			screen_x_um.push_back(xx);
 			screen_y_um.push_back(yy);
 			screen_x_um.push_back(xx + screen_grid_um / 2.0);
@@ -106,6 +114,8 @@ int main(int argc, char* argv[]){
 	}
 
 	cout << "circle_generation" << endl;
+	cout << "screen_x_um.size()" << screen_x_um.size() << endl;
+	cout << "screen_y_um.size()" << screen_y_um.size() << endl;
 
 
 	for (long i = 0; i < screen_x_um.size(); i++) {
